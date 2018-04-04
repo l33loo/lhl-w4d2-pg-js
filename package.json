@@ -18,6 +18,7 @@
   },
   "homepage": "https://github.com/l33loo/lhl-w4d2-pg-js#readme",
   "dependencies": {
+    "knex": "^0.14.4",
     "pg": "^7.4.1"
   }
 }
