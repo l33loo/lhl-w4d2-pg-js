@@ -12,12 +12,18 @@ const client = new pg.Client({
   ssl       : settings.ssl
 });
 
-client.connect((err) => {
-  if (err) {
-    return console.error("Connection error ", err);
-  }
-  queryDB(userInput, outputSearchResult);
-});
+function connectDB(input, cb) {
+  client.connect((err) => {
+    if (err) {
+      return console.error("Connection error ", err);
+    }
+    cb(input, outputSearchResult);
+  });
+}
+
+//
+//   queryDB(userInput, outputSearchResult);
+// });
 
 function queryDB(input, cb) {
   client.query("SELECT * FROM famous_people WHERE first_name = $1", [input], (err, result) => {
@@ -39,3 +45,4 @@ function outputSearchResult(input, res) {
   });
 }
 
+connectDB(userInput, queryDB);
