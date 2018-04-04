@@ -12,6 +12,10 @@ const client = new pg.Client({
   ssl       : settings.ssl
 });
 
+function getSearchResults(input, cb) {
+  cb(input, queryDB);
+}
+
 function connectDB(input, cb) {
   client.connect((err) => {
     if (err) {
@@ -21,20 +25,13 @@ function connectDB(input, cb) {
   });
 }
 
-//
-//   queryDB(userInput, outputSearchResult);
-// });
-
 function queryDB(input, cb) {
   client.query("SELECT * FROM famous_people WHERE first_name = $1", [input], (err, result) => {
     if (err) {
       return console.error('error running query ', err);
     }
     console.log('Searching...');
-
     cb(input, result.rows);
-
-    //outputSearchResult(result.rows);
   });
 }
 
@@ -45,4 +42,4 @@ function outputSearchResult(input, res) {
   });
 }
 
-connectDB(userInput, queryDB);
+getSearchResults(userInput, connectDB);
