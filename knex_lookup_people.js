@@ -14,15 +14,16 @@ const knex = require("knex")({
   }
 });
 
-console.log(userInput);
 knex('famous_people')
   .where('first_name', userInput)
-  .then(function(rows) {
+  .asCallback(function(err, rows) {
+    if (err) {
+      return console.error(err);
+    };
     console.log(`Found ${rows.length} person(s) by the name '${userInput}':`);
     rows.forEach((row) => {
-    console.log(`-${rows.indexOf(row) + 1}: ${row.first_name} ${row.last_name}, born ${row.birthdate.toISOString().substr(0, 10)}`);
+      console.log(`-${rows.indexOf(row) + 1}: ${row.first_name} ${row.last_name}, born ${row.birthdate.toISOString().substr(0, 10)}`);
+    });
   });
-  })
-  .catch(function(err) {
-    console.log(err);
-  })
+
+
