@@ -38,7 +38,7 @@ function queryDB(input, cb) {
 function outputSearchResult(input, res) {
   console.log(`Found ${res.length} person(s) by the name '${input}':`);
   res.forEach((row) => {
-    console.log(`-${res.indexOf(res) + 1}: ${row.first_name} ${row.last_name}, born ${row.birthdate.toISOString().substr(0, 10)}`);
+    console.log(`-${res.indexOf(row) + 1}: ${row.first_name} ${row.last_name}, born ${row.birthdate.toISOString().substr(0, 10)}`);
   });
 }
 
