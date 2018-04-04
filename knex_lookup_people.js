@@ -24,6 +24,7 @@ knex('famous_people')
     rows.forEach((row) => {
       console.log(`-${rows.indexOf(row) + 1}: ${row.first_name} ${row.last_name}, born ${row.birthdate.toISOString().substr(0, 10)}`);
     });
+    process.exit();
   });
 
 

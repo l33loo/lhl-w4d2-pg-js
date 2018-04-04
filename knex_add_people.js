@@ -21,6 +21,7 @@ knex('famous_people')
       return console.error(err);
     }
     console.log(`Added '${userInput[0]} ${userInput[1]}', born on ${userInput[2]}, to the database.`);
-  });
+    process.exit();
+  })
 
 
